@@ -1,4 +1,4 @@
-﻿namespace CarsApi.Helpers
+﻿namespace BusinessLogic.Helpers
 {
     public class CarDTO
     {

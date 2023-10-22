@@ -1,4 +1,6 @@
 
+using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,9 @@ namespace CarsApi
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<CarsApiDbContext>(opts => opts.UseSqlServer(connStr));
+
+            //Business logic
+            builder.Services.AddScoped<ICarsService, CarsService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
