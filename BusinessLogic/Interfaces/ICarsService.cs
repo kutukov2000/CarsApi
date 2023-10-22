@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Helpers;
+﻿using BusinessLogic.ApiModels;
 using DataAccess.Data.Entities;
 
 namespace BusinessLogic.Interfaces
@@ -8,7 +8,7 @@ namespace BusinessLogic.Interfaces
         List<Car>? Get();
         Car? GetById(int id);
         void Create(CarDTO carDto);
-        void Edit(int id, CarDTO carDto);
+        void Edit(EditCarModel car);
         void Delete(int id);
     }
 }

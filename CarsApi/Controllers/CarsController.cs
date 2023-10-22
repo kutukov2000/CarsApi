@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Helpers;
+﻿using BusinessLogic.ApiModels;
 using BusinessLogic.Interfaces;
 using DataAccess.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -38,9 +38,9 @@ namespace CarsApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(int id, [FromBody] CarDTO carDto)
+        public IActionResult Edit([FromBody] EditCarModel carDto)
         {
-            _service.Edit(id, carDto);
+            _service.Edit(carDto);
 
             return Ok();
         }
