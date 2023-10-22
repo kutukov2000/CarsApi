@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.ApiModels;
+using BusinessLogic.Dtos;
 using BusinessLogic.Interfaces;
-using DataAccess.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarsApi.Controllers
@@ -18,19 +18,19 @@ namespace CarsApi.Controllers
         [HttpGet("all")]
         public IActionResult Get()
         {
-            var items = _service.Get();
+            List<CarDto> cars = _service.Get();
 
-            return Ok(items); // status: 200
+            return Ok(cars); // status: 200
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            Car car = _service.GetById(id);
+            CarDto car = _service.GetById(id);
 
             return Ok(car);
         }
         [HttpPost]
-        public IActionResult Create([FromBody] CarDTO carDto)
+        public IActionResult Create([FromBody] CreateCarModel carDto)
         {
             _service.Create(carDto);
 

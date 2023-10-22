@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BusinessLogic.ApiModels;
+using BusinessLogic.Dtos;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Services
 {
@@ -15,7 +17,7 @@ namespace BusinessLogic.Services
             _context = context;
             _mapper = mapper;
         }
-        public void Create(CarDTO carDto)
+        public void Create(CreateCarModel carDto)
         {
             Car car = _mapper.Map<Car>(carDto);
 
@@ -45,18 +47,24 @@ namespace BusinessLogic.Services
             _context.SaveChanges();
         }
 
-        public List<Car> Get()
+        public List<CarDto> Get()
         {
-            return _context.Cars.ToList();
+            List<Car> cars = _context.Cars.Include(c => c.Category).ToList();
+
+            List<CarDto> carDtos = _mapper.Map<List<CarDto>>(cars);
+
+            return carDtos;
         }
 
-        public Car? GetById(int id)
+        public CarDto? GetById(int id)
         {
-            Car car = _context.Cars.Find(id);
+            Car car = _context.Cars.Include(c => c.Category).Where(c => c.Id == id).FirstOrDefault();
 
             if (car == null) return null;
 
-            return car;
+            CarDto carDto = _mapper.Map<CarDto>(car);
+
+            return carDto;
         }
     }
 }

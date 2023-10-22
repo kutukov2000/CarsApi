@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.ApiModels
 {
-    public class CarDTO
+    public class CreateCarModel
     {
         public string Producer { get; set; }
         public string Model { get; set; }

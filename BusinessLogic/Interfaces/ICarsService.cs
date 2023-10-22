@@ -1,13 +1,13 @@
 ﻿using BusinessLogic.ApiModels;
-using DataAccess.Data.Entities;
+using BusinessLogic.Dtos;
 
 namespace BusinessLogic.Interfaces
 {
     public interface ICarsService
     {
-        List<Car>? Get();
-        Car? GetById(int id);
-        void Create(CarDTO carDto);
+        List<CarDto>? Get();
+        CarDto? GetById(int id);
+        void Create(CreateCarModel carDto);
         void Edit(EditCarModel car);
         void Delete(int id);
     }
