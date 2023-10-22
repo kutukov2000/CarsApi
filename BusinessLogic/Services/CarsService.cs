@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Helpers;
+﻿using AutoMapper;
+using BusinessLogic.ApiModels;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
@@ -8,19 +9,15 @@ namespace BusinessLogic.Services
     public class CarsService : ICarsService
     {
         private readonly CarsApiDbContext _context;
-        public CarsService(CarsApiDbContext context)
+        private readonly IMapper _mapper;
+        public CarsService(CarsApiDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public void Create(CarDTO carDto)
         {
-            var car = new Car
-            {
-                Producer = carDto.Producer,
-                Model = carDto.Model,
-                Year = carDto.Year,
-                CategoryId = carDto.CategoryId
-            };
+            Car car = _mapper.Map<Car>(carDto);
 
             //if (!ModelState.IsValid) return BadRequest();
 
@@ -38,15 +35,9 @@ namespace BusinessLogic.Services
             _context.SaveChanges();
         }
 
-        public void Edit(int id, CarDTO carDto)
+        public void Edit(EditCarModel car)
         {
-            var existingCar = _context.Cars.Find(id);
-            if (existingCar == null) return;
-
-            existingCar.Producer = carDto.Producer;
-            existingCar.Model = carDto.Model;
-            existingCar.Year = carDto.Year;
-            existingCar.CategoryId = carDto.CategoryId;
+            Car existingCar = _mapper.Map<Car>(car);
 
             //if (!ModelState.IsValid) return BadRequest();
 

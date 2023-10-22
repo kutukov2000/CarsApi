@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.Helpers
+﻿namespace BusinessLogic.ApiModels
 {
     public class CarDTO
     {
@@ -7,5 +7,4 @@
         public int Year { get; set; }
         public int CategoryId { get; set; }
     }
-
 }
