@@ -5,10 +5,10 @@ namespace BusinessLogic.Interfaces
 {
     public interface ICarsService
     {
-        List<CarDto>? Get();
-        CarDto? GetById(int id);
-        void Create(CreateCarModel carDto);
-        void Edit(EditCarModel car);
-        void Delete(int id);
+        Task<List<CarDto>>? Get();
+        Task<CarDto?> GetById(int id);
+        Task Create(CreateCarModel carDto);
+        Task Edit(EditCarModel car);
+        Task Delete(int id);
     }
 }

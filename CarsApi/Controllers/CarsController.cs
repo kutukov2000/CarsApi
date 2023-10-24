@@ -18,14 +18,14 @@ namespace CarsApi.Controllers
         [HttpGet("all")]
         public IActionResult Get()
         {
-            List<CarDto> cars = _service.Get();
+            List<CarDto> cars = _service.Get().Result;
 
             return Ok(cars); // status: 200
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            CarDto car = _service.GetById(id);
+            CarDto car = _service.GetById(id).Result;
 
             return Ok(car);
         }

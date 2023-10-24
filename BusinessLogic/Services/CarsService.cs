@@ -17,48 +17,48 @@ namespace BusinessLogic.Services
             _context = context;
             _mapper = mapper;
         }
-        public void Create(CreateCarModel carDto)
+        public async Task Create(CreateCarModel carDto)
         {
             Car car = _mapper.Map<Car>(carDto);
 
             //if (!ModelState.IsValid) return BadRequest();
 
-            _context.Cars.Add(car);
-            _context.SaveChanges();
+            await _context.Cars.AddAsync(car);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var item = _context.Cars.Find(id);
+            var car = await _context.Cars.FindAsync(id);
 
-            if (item == null) return;
+            if (car == null) return;
 
-            _context.Cars.Remove(item);
-            _context.SaveChanges();
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
         }
 
-        public void Edit(EditCarModel car)
+        public async Task Edit(EditCarModel car)
         {
             Car existingCar = _mapper.Map<Car>(car);
 
             //if (!ModelState.IsValid) return BadRequest();
 
             _context.Cars.Update(existingCar);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<CarDto> Get()
+        public async Task<List<CarDto>> Get()
         {
-            List<Car> cars = _context.Cars.Include(c => c.Category).ToList();
+            List<Car> cars = await _context.Cars.Include(c => c.Category).ToListAsync();
 
             List<CarDto> carDtos = _mapper.Map<List<CarDto>>(cars);
 
             return carDtos;
         }
 
-        public CarDto? GetById(int id)
+        public async Task<CarDto?> GetById(int id)
         {
-            Car car = _context.Cars.Include(c => c.Category).Where(c => c.Id == id).FirstOrDefault();
+            Car car = await _context.Cars.Include(c => c.Category).Where(c => c.Id == id).FirstOrDefaultAsync();
 
             if (car == null) return null;
 
