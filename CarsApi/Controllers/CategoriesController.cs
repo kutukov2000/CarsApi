@@ -18,14 +18,14 @@ namespace CarsApi.Controllers
         [HttpGet("all")]
         public IActionResult Get()
         {
-            List<Category> categories = _service.Get();
+            List<Category> categories = _service.Get().Result;
 
             return Ok(categories); // status: 200
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            Category category = _service.GetById(id);
+            Category category = _service.GetById(id).Result;
 
             return Ok(category);
         }

@@ -21,7 +21,7 @@ namespace CarsApi
 
             //Business logic
             builder.Services.AddScoped<ICarsService, CarsService>();
-            builder.Services.AddScoped<ICategoriesService, CategoryService>();
+            builder.Services.AddScoped<ICategoriesService, CategoriesService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

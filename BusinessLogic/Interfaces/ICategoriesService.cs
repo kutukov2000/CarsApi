@@ -5,10 +5,10 @@ namespace BusinessLogic.Interfaces
 {
     public interface ICategoriesService
     {
-        List<Category>? Get();
-        Category? GetById(int id);
-        void Create(CreateCategoryModel createCategoryModel);
-        void Edit(Category category);
-        void Delete(int id);
+        Task<List<Category>?> Get();
+        Task<Category?> GetById(int id);
+        Task Create(CreateCategoryModel createCategoryModel);
+        Task Edit(Category category);
+        Task Delete(int id);
     }
 }
