@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.ApiModels;
 using BusinessLogic.Interfaces;
 using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarsApi.Controllers
@@ -15,6 +16,7 @@ namespace CarsApi.Controllers
         {
             _service = service;
         }
+
         [HttpGet("all")]
         public async Task<IActionResult> Get()
         {
@@ -22,6 +24,7 @@ namespace CarsApi.Controllers
 
             return Ok(categories);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -29,6 +32,7 @@ namespace CarsApi.Controllers
 
             return Ok(category);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCategoryModel category)
         {
@@ -45,7 +49,7 @@ namespace CarsApi.Controllers
             return Ok();
         }
 
-
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

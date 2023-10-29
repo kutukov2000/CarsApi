@@ -29,6 +29,7 @@ namespace CarsApi
             //Business logic
             builder.Services.AddScoped<ICarsService, CarsService>();
             builder.Services.AddScoped<ICategoriesService, CategoriesService>();
+            builder.Services.AddScoped<IAccountsService, AccountsService>();
 
             //Validation
             builder.Services.AddTransient<IValidator<CreateCarModel>, CreateCarModelValidator>();

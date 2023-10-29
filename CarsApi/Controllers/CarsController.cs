@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.ApiModels;
 using BusinessLogic.Dtos;
 using BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarsApi.Controllers
@@ -15,6 +16,7 @@ namespace CarsApi.Controllers
         {
             _service = service;
         }
+
         [HttpGet("all")]
         public async Task<IActionResult> Get()
         {
@@ -22,6 +24,7 @@ namespace CarsApi.Controllers
 
             return Ok(cars);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -45,6 +48,7 @@ namespace CarsApi.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
