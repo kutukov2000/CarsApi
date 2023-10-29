@@ -20,12 +20,12 @@ namespace CarsApi.Controllers
         {
             List<CarDto> cars = _service.Get().Result;
 
-            return Ok(cars); // status: 200
+            return Ok(cars);
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            CarDto car = _service.GetById(id).Result;
+            CarDto car = _service.GetById(id).Result!;
 
             return Ok(car);
         }
@@ -44,7 +44,6 @@ namespace CarsApi.Controllers
 
             return Ok();
         }
-
 
         [HttpDelete]
         public IActionResult Delete(int id)

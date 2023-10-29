@@ -20,12 +20,12 @@ namespace CarsApi.Controllers
         {
             List<Category> categories = _service.Get().Result;
 
-            return Ok(categories); // status: 200
+            return Ok(categories);
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            Category category = _service.GetById(id).Result;
+            Category category = _service.GetById(id).Result!;
 
             return Ok(category);
         }

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using BusinessLogic.ApiModels;
 using BusinessLogic.Dtos;
+using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace BusinessLogic.Services
 {
@@ -31,7 +33,7 @@ namespace BusinessLogic.Services
         {
             var car = await _context.Cars.FindAsync(id);
 
-            if (car == null) return;
+            if (car == null) throw new HttpException("Invalid car ID.", HttpStatusCode.NotFound);
 
             _context.Cars.Remove(car);
             await _context.SaveChangesAsync();
@@ -60,7 +62,7 @@ namespace BusinessLogic.Services
         {
             Car car = await _context.Cars.Include(c => c.Category).Where(c => c.Id == id).FirstOrDefaultAsync();
 
-            if (car == null) return null;
+            if (car == null) throw new HttpException("Invalid car ID.", HttpStatusCode.NotFound);
 
             CarDto carDto = _mapper.Map<CarDto>(car);
 

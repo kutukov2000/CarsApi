@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using BusinessLogic.ApiModels;
+using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace BusinessLogic.Services
 {
@@ -30,7 +32,7 @@ namespace BusinessLogic.Services
         {
             var item = await _context.Categories.FindAsync(id);
 
-            if (item == null) return;
+            if (item == null) throw new HttpException("Invalid category ID.", HttpStatusCode.NotFound);
 
             _context.Categories.Remove(item);
             await _context.SaveChangesAsync();
@@ -57,7 +59,7 @@ namespace BusinessLogic.Services
         {
             Category category = await _context.Categories.FindAsync(id);
 
-            if (category == null) return null;
+            if (category == null) throw new HttpException("Invalid category ID.", HttpStatusCode.NotFound);
 
             return category;
         }

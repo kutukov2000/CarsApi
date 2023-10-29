@@ -38,10 +38,11 @@ namespace CarsApi
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
