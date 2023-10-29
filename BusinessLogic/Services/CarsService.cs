@@ -2,14 +2,13 @@
 using BusinessLogic.ApiModels;
 using BusinessLogic.Dtos;
 using BusinessLogic.Exceptions;
+using BusinessLogic.Helpers;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
 using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
-using System.Text;
 
 namespace BusinessLogic.Services
 {
@@ -28,12 +27,7 @@ namespace BusinessLogic.Services
         }
         public async Task Create(CreateCarModel carDto)
         {
-            ValidationResult results = _createCarModelValidator.Validate(carDto);
-
-            if (!results.IsValid)
-            {
-                ThrowBadRequestExeption(results);
-            }
+            ValidationHelper<CreateCarModel>.Validate(_createCarModelValidator, carDto);
 
             Car car = _mapper.Map<Car>(carDto);
 
@@ -53,12 +47,7 @@ namespace BusinessLogic.Services
 
         public async Task Edit(EditCarModel car)
         {
-            ValidationResult results = _editCarModelValidator.Validate(car);
-
-            if (!results.IsValid)
-            {
-                ThrowBadRequestExeption(results);
-            }
+            ValidationHelper<EditCarModel>.Validate(_editCarModelValidator, car);
 
             Car existingCar = _mapper.Map<Car>(car);
 
@@ -84,18 +73,6 @@ namespace BusinessLogic.Services
             CarDto carDto = _mapper.Map<CarDto>(car);
 
             return carDto;
-        }
-
-        private void ThrowBadRequestExeption(ValidationResult results)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (var failure in results.Errors)
-            {
-                stringBuilder.Append($"{failure.ErrorMessage} ");
-            }
-
-            throw new HttpException(stringBuilder.ToString(), HttpStatusCode.BadRequest);
         }
     }
 }

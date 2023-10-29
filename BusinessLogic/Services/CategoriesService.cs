@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using BusinessLogic.ApiModels;
 using BusinessLogic.Exceptions;
+using BusinessLogic.Helpers;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
 using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
-using System.Text;
 
 namespace BusinessLogic.Services
 {
@@ -16,23 +15,18 @@ namespace BusinessLogic.Services
     {
         private readonly CarsApiDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IValidator<Category> _validator;
+        private readonly IValidator<Category> _editCategoryModelValidator;
         private readonly IValidator<CreateCategoryModel> _createCategoryModelValidator;
         public CategoriesService(CarsApiDbContext context, IMapper mapper, IValidator<Category> validator, IValidator<CreateCategoryModel> createCategoryModelValidator)
         {
             _context = context;
             _mapper = mapper;
-            _validator = validator;
+            _editCategoryModelValidator = validator;
             _createCategoryModelValidator = createCategoryModelValidator;
         }
         public async Task Create(CreateCategoryModel createCategoryModel)
         {
-            ValidationResult results = _createCategoryModelValidator.Validate(createCategoryModel);
-
-            if (!results.IsValid)
-            {
-                ThrowBadRequestExeption(results);
-            }
+            ValidationHelper<CreateCategoryModel>.Validate(_createCategoryModelValidator, createCategoryModel);
 
             Category category = _mapper.Map<Category>(createCategoryModel);
 
@@ -52,14 +46,9 @@ namespace BusinessLogic.Services
 
         public async Task Edit(Category category)
         {
+            ValidationHelper<Category>.Validate(_editCategoryModelValidator, category);
+
             Category existingCategory = _mapper.Map<Category>(category);
-
-            ValidationResult results = _validator.Validate(existingCategory);
-
-            if (!results.IsValid)
-            {
-                ThrowBadRequestExeption(results);
-            }
 
             _context.Categories.Update(existingCategory);
             await _context.SaveChangesAsync();
@@ -79,18 +68,6 @@ namespace BusinessLogic.Services
             if (category == null) throw new HttpException("Invalid category ID.", HttpStatusCode.NotFound);
 
             return category;
-        }
-
-        private void ThrowBadRequestExeption(ValidationResult results)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (var failure in results.Errors)
-            {
-                stringBuilder.Append($"{failure.ErrorMessage} ");
-            }
-
-            throw new HttpException(stringBuilder.ToString(), HttpStatusCode.BadRequest);
         }
     }
 }
