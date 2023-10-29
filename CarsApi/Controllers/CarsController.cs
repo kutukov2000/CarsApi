@@ -16,39 +16,39 @@ namespace CarsApi.Controllers
             _service = service;
         }
         [HttpGet("all")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            List<CarDto> cars = _service.Get().Result;
+            List<CarDto> cars = await _service.Get();
 
             return Ok(cars);
         }
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            CarDto car = _service.GetById(id).Result!;
+            CarDto car = await _service.GetById(id);
 
             return Ok(car);
         }
         [HttpPost]
-        public IActionResult Create([FromBody] CreateCarModel carDto)
+        public async Task<IActionResult> Create([FromBody] CreateCarModel carDto)
         {
-            _service.Create(carDto);
+            await _service.Create(carDto);
 
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult Edit([FromBody] EditCarModel carDto)
+        public async Task<IActionResult> Edit([FromBody] EditCarModel carDto)
         {
-            _service.Edit(carDto);
+            await _service.Edit(carDto);
 
             return Ok();
         }
 
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
 
             return Ok();
         }

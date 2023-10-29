@@ -2,6 +2,8 @@
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess.Data;
+using DataAccess.Data.Entities;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarsApi
@@ -22,6 +24,7 @@ namespace CarsApi
             //Business logic
             builder.Services.AddScoped<ICarsService, CarsService>();
             builder.Services.AddScoped<ICategoriesService, CategoriesService>();
+            builder.Services.AddTransient<IValidator<Car>, CarValidator>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

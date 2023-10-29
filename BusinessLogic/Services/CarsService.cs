@@ -5,8 +5,11 @@ using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Text;
 
 namespace BusinessLogic.Services
 {
@@ -14,16 +17,30 @@ namespace BusinessLogic.Services
     {
         private readonly CarsApiDbContext _context;
         private readonly IMapper _mapper;
-        public CarsService(CarsApiDbContext context, IMapper mapper)
+        private readonly IValidator<Car> _validator;
+        public CarsService(CarsApiDbContext context, IMapper mapper, IValidator<Car> validator)
         {
             _context = context;
             _mapper = mapper;
+            _validator = validator;
         }
         public async Task Create(CreateCarModel carDto)
         {
             Car car = _mapper.Map<Car>(carDto);
 
-            //if (!ModelState.IsValid) return BadRequest();
+            ValidationResult results = _validator.Validate(car);
+
+            if (!results.IsValid)
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+
+                foreach (var failure in results.Errors)
+                {
+                    stringBuilder.AppendLine($"{failure.PropertyName}: {failure.ErrorMessage}");
+                }
+
+                throw new HttpException(stringBuilder.ToString(), HttpStatusCode.BadRequest);
+            }
 
             await _context.Cars.AddAsync(car);
             await _context.SaveChangesAsync();
@@ -43,7 +60,12 @@ namespace BusinessLogic.Services
         {
             Car existingCar = _mapper.Map<Car>(car);
 
-            //if (!ModelState.IsValid) return BadRequest();
+            ValidationResult results = _validator.Validate(existingCar);
+
+            if (!results.IsValid)
+            {
+                ThrowBadRequestExeption(results);
+            }
 
             _context.Cars.Update(existingCar);
             await _context.SaveChangesAsync();
@@ -67,6 +89,18 @@ namespace BusinessLogic.Services
             CarDto carDto = _mapper.Map<CarDto>(car);
 
             return carDto;
+        }
+
+        private void ThrowBadRequestExeption(ValidationResult results)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (var failure in results.Errors)
+            {
+                stringBuilder.Append($"{failure.ErrorMessage} ");
+            }
+
+            throw new HttpException(stringBuilder.ToString(), HttpStatusCode.BadRequest);
         }
     }
 }
