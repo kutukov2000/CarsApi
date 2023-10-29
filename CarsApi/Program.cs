@@ -5,6 +5,7 @@ using BusinessLogic.Services;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarsApi
@@ -21,6 +22,9 @@ namespace CarsApi
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<CarsApiDbContext>(opts => opts.UseSqlServer(connStr));
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<CarsApiDbContext>()
+                .AddDefaultTokenProviders();
 
             //Business logic
             builder.Services.AddScoped<ICarsService, CarsService>();

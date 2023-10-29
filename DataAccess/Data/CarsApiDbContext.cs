@@ -1,9 +1,10 @@
 ﻿using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Data
 {
-    public class CarsApiDbContext : DbContext
+    public class CarsApiDbContext : IdentityDbContext
     {
         public CarsApiDbContext() { }
         public CarsApiDbContext(DbContextOptions options) : base(options) { }
