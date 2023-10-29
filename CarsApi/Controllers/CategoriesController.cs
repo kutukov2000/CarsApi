@@ -16,40 +16,40 @@ namespace CarsApi.Controllers
             _service = service;
         }
         [HttpGet("all")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            List<Category> categories = _service.Get().Result;
+            List<Category> categories = await _service.Get();
 
             return Ok(categories);
         }
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            Category category = _service.GetById(id).Result!;
+            Category category = await _service.GetById(id);
 
             return Ok(category);
         }
         [HttpPost]
-        public IActionResult Create([FromBody] CreateCategoryModel category)
+        public async Task<IActionResult> Create([FromBody] CreateCategoryModel category)
         {
-            _service.Create(category);
+            await _service.Create(category);
 
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult Edit([FromBody] Category category)
+        public async Task<IActionResult> Edit([FromBody] Category category)
         {
-            _service.Edit(category);
+            await _service.Edit(category);
 
             return Ok();
         }
 
 
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
 
             return Ok();
         }

@@ -1,4 +1,5 @@
 
+using BusinessLogic.ApiModels;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess.Data;
@@ -24,7 +25,12 @@ namespace CarsApi
             //Business logic
             builder.Services.AddScoped<ICarsService, CarsService>();
             builder.Services.AddScoped<ICategoriesService, CategoriesService>();
-            builder.Services.AddTransient<IValidator<Car>, CarValidator>();
+
+            //Validation
+            builder.Services.AddTransient<IValidator<CreateCarModel>, CreateCarModelValidator>();
+            builder.Services.AddTransient<IValidator<EditCarModel>, EditCarModelValidator>();
+            builder.Services.AddTransient<IValidator<Category>, EditCategoryModelValidator>();
+            builder.Services.AddTransient<IValidator<CreateCategoryModel>, CreateCategoryModelValidator>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

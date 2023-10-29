@@ -17,30 +17,25 @@ namespace BusinessLogic.Services
     {
         private readonly CarsApiDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IValidator<Car> _validator;
-        public CarsService(CarsApiDbContext context, IMapper mapper, IValidator<Car> validator)
+        private readonly IValidator<CreateCarModel> _createCarModelValidator;
+        private readonly IValidator<EditCarModel> _editCarModelValidator;
+        public CarsService(CarsApiDbContext context, IMapper mapper, IValidator<CreateCarModel> createCarModelValidator, IValidator<EditCarModel> editCarModelValidator)
         {
             _context = context;
             _mapper = mapper;
-            _validator = validator;
+            _createCarModelValidator = createCarModelValidator;
+            _editCarModelValidator = editCarModelValidator;
         }
         public async Task Create(CreateCarModel carDto)
         {
-            Car car = _mapper.Map<Car>(carDto);
-
-            ValidationResult results = _validator.Validate(car);
+            ValidationResult results = _createCarModelValidator.Validate(carDto);
 
             if (!results.IsValid)
             {
-                StringBuilder stringBuilder = new StringBuilder();
-
-                foreach (var failure in results.Errors)
-                {
-                    stringBuilder.AppendLine($"{failure.PropertyName}: {failure.ErrorMessage}");
-                }
-
-                throw new HttpException(stringBuilder.ToString(), HttpStatusCode.BadRequest);
+                ThrowBadRequestExeption(results);
             }
+
+            Car car = _mapper.Map<Car>(carDto);
 
             await _context.Cars.AddAsync(car);
             await _context.SaveChangesAsync();
@@ -58,14 +53,14 @@ namespace BusinessLogic.Services
 
         public async Task Edit(EditCarModel car)
         {
-            Car existingCar = _mapper.Map<Car>(car);
-
-            ValidationResult results = _validator.Validate(existingCar);
+            ValidationResult results = _editCarModelValidator.Validate(car);
 
             if (!results.IsValid)
             {
                 ThrowBadRequestExeption(results);
             }
+
+            Car existingCar = _mapper.Map<Car>(car);
 
             _context.Cars.Update(existingCar);
             await _context.SaveChangesAsync();
