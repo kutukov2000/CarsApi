@@ -3,23 +3,22 @@ using BusinessLogic.ApiModels;
 using BusinessLogic.Exceptions;
 using BusinessLogic.Helpers;
 using BusinessLogic.Interfaces;
-using DataAccess.Data;
 using DataAccess.Data.Entities;
+using DataAccess.Repositories;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace BusinessLogic.Services
 {
     public class CategoriesService : ICategoriesService
     {
-        private readonly CarsApiDbContext _context;
+        private readonly IRepository<Category> _categoriesRepository;
         private readonly IMapper _mapper;
         private readonly IValidator<Category> _editCategoryModelValidator;
         private readonly IValidator<CreateCategoryModel> _createCategoryModelValidator;
-        public CategoriesService(CarsApiDbContext context, IMapper mapper, IValidator<Category> validator, IValidator<CreateCategoryModel> createCategoryModelValidator)
+        public CategoriesService(IRepository<Category> categoriesRepository, IMapper mapper, IValidator<Category> validator, IValidator<CreateCategoryModel> createCategoryModelValidator)
         {
-            _context = context;
+            _categoriesRepository = categoriesRepository;
             _mapper = mapper;
             _editCategoryModelValidator = validator;
             _createCategoryModelValidator = createCategoryModelValidator;
@@ -30,18 +29,18 @@ namespace BusinessLogic.Services
 
             Category category = _mapper.Map<Category>(createCategoryModel);
 
-            await _context.Categories.AddAsync(category);
-            await _context.SaveChangesAsync();
+            await _categoriesRepository.InsertAsync(category);
+            await _categoriesRepository.SaveAsync();
         }
 
         public async Task Delete(int id)
         {
-            var item = await _context.Categories.FindAsync(id);
+            var item = await _categoriesRepository.GetByIdAsync(id);
 
             if (item == null) throw new HttpException("Invalid category ID.", HttpStatusCode.NotFound);
 
-            _context.Categories.Remove(item);
-            await _context.SaveChangesAsync();
+            _categoriesRepository.Delete(item);
+            await _categoriesRepository.SaveAsync();
         }
 
         public async Task Edit(Category category)
@@ -50,20 +49,20 @@ namespace BusinessLogic.Services
 
             Category existingCategory = _mapper.Map<Category>(category);
 
-            _context.Categories.Update(existingCategory);
-            await _context.SaveChangesAsync();
+            _categoriesRepository.Update(existingCategory);
+            await _categoriesRepository.SaveAsync();
         }
 
         public async Task<List<Category>?> Get()
         {
-            List<Category> categories = await _context.Categories.ToListAsync();
+            List<Category> categories = await _categoriesRepository.GetAllAsync();
 
             return categories;
         }
 
         public async Task<Category?> GetById(int id)
         {
-            Category category = await _context.Categories.FindAsync(id);
+            Category category = await _categoriesRepository.GetByIdAsync(id);
 
             if (category == null) throw new HttpException("Invalid category ID.", HttpStatusCode.NotFound);
 

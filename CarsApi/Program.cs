@@ -4,6 +4,7 @@ using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
+using DataAccess.Repositories;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,7 @@ namespace CarsApi
             builder.Services.AddScoped<ICarsService, CarsService>();
             builder.Services.AddScoped<ICategoriesService, CategoriesService>();
             builder.Services.AddScoped<IAccountsService, AccountsService>();
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             //Validation
             builder.Services.AddTransient<IValidator<CreateCarModel>, CreateCarModelValidator>();

@@ -28,7 +28,7 @@ namespace CarsApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            CarDto car = await _service.GetById(id);
+            EditCarModel car = await _service.GetById(id);
 
             return Ok(car);
         }
