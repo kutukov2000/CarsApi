@@ -8,28 +8,36 @@ namespace Core.Services
 {
     public class AccountsService : IAccountsService
     {
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly IJwtService _jwtService;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AccountsService(SignInManager<IdentityUser> signInManager,
+        public AccountsService(IJwtService jwtService,
+                               SignInManager<IdentityUser> signInManager,
                                UserManager<IdentityUser> userManager)
         {
-            this.signInManager = signInManager;
-            this.userManager = userManager;
+            _jwtService = jwtService;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
-        public async Task LoginAsync(LoginRequest model)
+        public async Task<LoginResponse> LoginAsync(LoginRequest model)
         {
-            var user = await userManager.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(model.Email);
 
-            if (user == null || !await userManager.CheckPasswordAsync(user, model.Password))
+            if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
                 throw new HttpException("Invalid email or password.", HttpStatusCode.BadRequest);
 
-            await signInManager.SignInAsync(user, true);
+            await _signInManager.SignInAsync(user, true);
+
+            return new()
+            {
+                Token = _jwtService.CreateToken(_jwtService.GetClaims(user))
+            };
         }
 
         public async Task LogoutAsync()
         {
-            await signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
         }
 
         public async Task RegisterAsync(RegisterRequest model)
@@ -41,7 +49,7 @@ namespace Core.Services
                 PhoneNumber = model.PhoneNumber,
             };
 
-            var result = await userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
