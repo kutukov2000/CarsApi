@@ -1,9 +1,9 @@
-﻿using BusinessLogic.Interfaces;
-using DataAccess.Data;
+﻿using Core.Interfaces;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace DataAccess.Repositories
+namespace Infrastructure.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

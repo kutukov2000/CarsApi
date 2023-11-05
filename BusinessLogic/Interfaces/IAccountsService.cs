@@ -1,6 +1,6 @@
-﻿using BusinessLogic.ApiModels.Account;
+﻿using Core.ApiModels.Account;
 
-namespace BusinessLogic.Interfaces
+namespace Core.Interfaces
 {
     public interface IAccountsService
     {

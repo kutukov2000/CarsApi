@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.ApiModels
+﻿namespace Core.ApiModels
 {
     public class CreateCategoryModel
     {

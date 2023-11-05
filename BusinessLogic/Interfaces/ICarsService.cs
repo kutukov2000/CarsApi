@@ -1,7 +1,7 @@
-﻿using BusinessLogic.ApiModels;
-using BusinessLogic.Dtos;
+﻿using Core.ApiModels;
+using Core.Dtos;
 
-namespace BusinessLogic.Interfaces
+namespace Core.Interfaces
 {
     public interface ICarsService
     {

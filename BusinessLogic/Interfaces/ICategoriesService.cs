@@ -1,7 +1,7 @@
-﻿using BusinessLogic.ApiModels;
-using BusinessLogic.Entities;
+﻿using Core.ApiModels;
+using Core.Entities;
 
-namespace BusinessLogic.Interfaces
+namespace Core.Interfaces
 {
     public interface ICategoriesService
     {

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BusinessLogic.ApiModels;
-using BusinessLogic.Dtos;
-using BusinessLogic.Entities;
+using Core.ApiModels;
+using Core.Dtos;
+using Core.Entities;
 
-namespace BusinessLogic.Helpers
+namespace Core.Helpers
 {
     public class MapperConfigs : Profile
     {

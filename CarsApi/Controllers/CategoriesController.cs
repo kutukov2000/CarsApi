@@ -1,6 +1,6 @@
-﻿using BusinessLogic.ApiModels;
-using BusinessLogic.Entities;
-using BusinessLogic.Interfaces;
+﻿using Core.ApiModels;
+using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

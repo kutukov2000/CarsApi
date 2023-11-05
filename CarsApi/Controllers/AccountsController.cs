@@ -1,5 +1,5 @@
-﻿using BusinessLogic.ApiModels.Account;
-using BusinessLogic.Interfaces;
+﻿using Core.ApiModels.Account;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarsApi.Controllers

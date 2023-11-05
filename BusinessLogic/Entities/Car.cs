@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.Entities
+﻿namespace Core.Entities
 {
     public class Car
     {

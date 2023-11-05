@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.ApiModels.Account
+﻿namespace Core.ApiModels.Account
 {
     public class LoginRequest
     {

@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.Dtos
+﻿namespace Core.Dtos
 {
     public class CarDto
     {

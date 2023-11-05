@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace BusinessLogic.Exceptions
+namespace Core.Exceptions
 {
 
     [Serializable]

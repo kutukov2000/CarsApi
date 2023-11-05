@@ -1,4 +1,4 @@
-﻿using BusinessLogic.ApiModels;
+﻿using Core.ApiModels;
 using FluentValidation;
 
 public class EditCarModelValidator : AbstractValidator<EditCarModel>

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DataAccess.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration

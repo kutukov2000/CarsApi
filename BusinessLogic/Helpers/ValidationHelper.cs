@@ -1,10 +1,10 @@
-﻿using BusinessLogic.Exceptions;
+﻿using Core.Exceptions;
 using FluentValidation;
 using FluentValidation.Results;
 using System.Net;
 using System.Text;
 
-namespace BusinessLogic.Helpers
+namespace Core.Helpers
 {
     public static class ValidationHelper<Model>
     {

@@ -1,10 +1,10 @@
-﻿using BusinessLogic.ApiModels.Account;
-using BusinessLogic.Exceptions;
-using BusinessLogic.Interfaces;
+﻿using Core.ApiModels.Account;
+using Core.Exceptions;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
 
-namespace BusinessLogic.Services
+namespace Core.Services
 {
     public class AccountsService : IAccountsService
     {

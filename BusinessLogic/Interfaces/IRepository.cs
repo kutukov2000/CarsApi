@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace BusinessLogic.Interfaces
+namespace Core.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {

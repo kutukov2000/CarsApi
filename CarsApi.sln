@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34004.107
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsApi", "CarsApi\CarsApi.csproj", "{7794BC3E-177B-4E36-9948-11AD842C4668}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{51F62E02-D630-40D7-8E94-8512CF9CC04E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "DataAccess\Infrastructure.csproj", "{51F62E02-D630-40D7-8E94-8512CF9CC04E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{0E720BB1-8E26-4ABE-B360-D768A03584B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "BusinessLogic\Core.csproj", "{0E720BB1-8E26-4ABE-B360-D768A03584B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

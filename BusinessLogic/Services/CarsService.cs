@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using BusinessLogic.ApiModels;
-using BusinessLogic.Dtos;
-using BusinessLogic.Entities;
-using BusinessLogic.Exceptions;
-using BusinessLogic.Helpers;
-using BusinessLogic.Interfaces;
+using Core.ApiModels;
+using Core.Dtos;
+using Core.Entities;
+using Core.Exceptions;
+using Core.Helpers;
+using Core.Interfaces;
 using FluentValidation;
 using System.Net;
 
-namespace BusinessLogic.Services
+namespace Core.Services
 {
     public class CarsService : ICarsService
     {

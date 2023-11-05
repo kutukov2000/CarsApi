@@ -1,5 +1,5 @@
-﻿using BusinessLogic.ApiModels;
-using BusinessLogic.Exceptions;
+﻿using Core.ApiModels;
+using Core.Exceptions;
 using System.Net;
 
 public class ExceptionMiddleware
