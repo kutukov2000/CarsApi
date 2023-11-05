@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using BusinessLogic.ApiModels;
 using BusinessLogic.Dtos;
+using BusinessLogic.Entities;
 using BusinessLogic.Exceptions;
 using BusinessLogic.Helpers;
 using BusinessLogic.Interfaces;
-using DataAccess.Data.Entities;
-using DataAccess.Repositories;
 using FluentValidation;
 using System.Net;
 

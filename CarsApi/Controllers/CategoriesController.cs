@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.ApiModels;
+using BusinessLogic.Entities;
 using BusinessLogic.Interfaces;
-using DataAccess.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

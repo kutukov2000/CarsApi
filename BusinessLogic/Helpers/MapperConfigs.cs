@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogic.ApiModels;
 using BusinessLogic.Dtos;
-using DataAccess.Data.Entities;
+using BusinessLogic.Entities;
 
 namespace BusinessLogic.Helpers
 {
@@ -16,7 +16,7 @@ namespace BusinessLogic.Helpers
             CreateMap<CarDto, Car>().ReverseMap();
 
             //Maps for Category model
-            CreateMap<CreateCategoryModel, DataAccess.Data.Entities.Category>().ReverseMap();
+            CreateMap<CreateCategoryModel, Category>().ReverseMap();
         }
     }
 }

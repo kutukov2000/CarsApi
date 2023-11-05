@@ -1,4 +1,4 @@
-﻿using DataAccess.Data.Entities;
+﻿using BusinessLogic.Entities;
 using FluentValidation;
 
 public class EditCategoryModelValidator : AbstractValidator<Category>

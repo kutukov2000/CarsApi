@@ -1,5 +1,5 @@
 ﻿using BusinessLogic.ApiModels;
-using DataAccess.Data.Entities;
+using BusinessLogic.Entities;
 
 namespace BusinessLogic.Interfaces
 {

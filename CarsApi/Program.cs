@@ -1,9 +1,8 @@
-
 using BusinessLogic.ApiModels;
+using BusinessLogic.Entities;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess.Data;
-using DataAccess.Data.Entities;
 using DataAccess.Repositories;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
