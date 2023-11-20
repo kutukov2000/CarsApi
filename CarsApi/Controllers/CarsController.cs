@@ -17,7 +17,7 @@ namespace CarsApi.Controllers
             _service = service;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("all")]
         public async Task<IActionResult> Get()
         {

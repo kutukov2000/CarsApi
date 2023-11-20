@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34227.203
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveysApi", "SurveysApi\SurveysApi.csproj", "{5565DB44-AC92-464D-8E6D-7514091EF9E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{39EBF3BA-8FC7-4B3D-A525-DEEDEBB7AC92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5565DB44-AC92-464D-8E6D-7514091EF9E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5565DB44-AC92-464D-8E6D-7514091EF9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5565DB44-AC92-464D-8E6D-7514091EF9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5565DB44-AC92-464D-8E6D-7514091EF9E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39EBF3BA-8FC7-4B3D-A525-DEEDEBB7AC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EBF3BA-8FC7-4B3D-A525-DEEDEBB7AC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EBF3BA-8FC7-4B3D-A525-DEEDEBB7AC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EBF3BA-8FC7-4B3D-A525-DEEDEBB7AC92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F060B9E-7B5E-4137-9355-CE136DFB163F}
+	EndGlobalSection
+EndGlobal

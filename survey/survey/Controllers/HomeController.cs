@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataAccess.Data;
+using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
 using survey.Models;
 using System.Diagnostics;
 
@@ -6,16 +8,18 @@ namespace survey.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly SurveyDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(SurveyDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Survey> surveys = _context.Surveys.ToList();
+
+            return View(surveys);
         }
 
         public IActionResult Privacy()
